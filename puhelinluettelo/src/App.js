@@ -1,13 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 
 const App = (props) => {
-  const [ persons, setPersons] = useState([
-    { name: 'Arto Hellas' }
-  ]) 
+  const [ persons, setPersons] = useState([]) 
   const [ newName, setNewName ] = useState('nimi tulee tähän')
   const [ newNumber, setNewNumber] = useState('')
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/persons').then(response => {
+        setPersons(response.data)
+      })
+  }, [])
 
   const handleNameChange = (event) => {
     console.log(event.target.value)
@@ -23,8 +28,7 @@ const App = (props) => {
     event.preventDefault()
     const person = {
       name: newName,
-      number: newNumber,
-      id: persons.length + 1
+      number: newNumber
     }
 
     if(persons.some(person => person.name === newName)){
@@ -32,9 +36,13 @@ const App = (props) => {
         setNewName('')
         setNewNumber('')
     }else{
-        setPersons(persons.concat(person))
+      axios
+      .post('http://localhost:3001/persons', person)
+      .then(response => {
+        setPersons(persons.concat(response.data))
         setNewName('')
         setNewNumber('')
+      })
     }
   }
 
