@@ -11,15 +11,15 @@ const Finder = (props) => {
   )
 }
 
-const Show = (props) => {
-  const country = props
-  console.log(country)
+const Show = () => {
+  const [countryInfo, setCountryInfo] = useState([])
+  console.log(countryInfo)
   return(
    <div>
-      <h1>{country.name}</h1>
-      <p>capital {country.capital}</p>
-      <p>population {country.population}</p>
-      <img src={country.flag} alt={country.name + " flag"} width="100"></img>
+      <h1>{countryInfo.name}</h1>
+      <p>capital {countryInfo.capital}</p>
+      <p>population {countryInfo.population}</p>
+      <img src={countryInfo.flag} alt={countryInfo.name + " flag"} width="100"></img>
   </div>
   )
 }
@@ -36,7 +36,7 @@ const Countries = (props) => {
     const results = props.countries.filter(function (country) { return country.name.toLowerCase().includes(props.newFilter.toLowerCase())})
     if (results.length > 1 && results.length <= 10) {
       return (results.map(country =>
-        <p key={country.name}>{country.name} <button onClick={() => Show(country)}>show</button></p>)
+        <p key={country.name}>{country.name} <button onClick={setCountryInfo(country)}>show</button></p>)
         )
     } else if (results.length === 1) {
       return (

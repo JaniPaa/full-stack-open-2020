@@ -1,9 +1,11 @@
 import React from 'react'
-import numberService from '../services/numberService'
 
-const Person = ({ person }) => {
+const Person = (props) => {
+
   return (
-    <li>{person.name} {person.number} <button>delete</button></li>
+    <li>{props.person.name} {props.person.number} <button onClick={(event)=>{
+      props.dele(event, props.person)
+    }}>delete</button></li>
   )
 }
 

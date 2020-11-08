@@ -11,11 +11,14 @@ const create = newObject => {
 }
 
 const update = (id, newObject) => {
-    return axios.put(`${url}/${id}`, newObject)
+    const request = axios.put(`${url}/${id}`, newObject)
+    return request.then(response => {
+        return response.data
+    })
 }
 
 const deleteNumber = (id) => {
-    axios.delete(`${url}/${id}`)
+    return axios.delete(`${url}/${id}`)
 }
 
 export default {
