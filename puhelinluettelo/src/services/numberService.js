@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+//npm run server
+//npm start
+
 const url = 'http://localhost:3001/persons'
 
 const getAll = () => {

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import numberService from './services/numberService'
@@ -16,6 +15,7 @@ const App = (props) => {
     numberService
     .getAll()
     .then(response => {
+      console.log(response)
       setPersons(response.data)
     })
   }, [])
